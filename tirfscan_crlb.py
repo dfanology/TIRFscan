@@ -204,9 +204,9 @@ def crlb_study(zmax, numangles, minNA, maxNA, ncovglass, alpha):
 if __name__ == "__main__":
     
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13,7))
-    ax1.set_xlabel("z (nm)", fontsize=14)
+    ax1.set_xlabel("z ($\mu$m)", fontsize=14)
     ax1.set_ylabel("CRLB z (nm)", fontsize=14)
-    ax2.set_xlabel("z (nm)", fontsize=14)
+    ax2.set_xlabel("z ($\mu$m)", fontsize=14)
     ax2.set_ylabel("Improvement factor",fontsize=14)
     ax1.set_xlim([0, 0.3])
     ax1.set_ylim([0, 20])
