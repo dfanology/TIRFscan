@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-Simple python implementation of Levenberg Marquardt according to
-"Efficient maximum likelihood estimator fitting of histograms"
-https://www.nature.com/articles/nmeth0510-338
-
-Created on Fri Aug 27 17:03:07 2021
-
-@author: jelmer
+CRLB calculation for TIRFscan
+@authors: jelmer, daniel, carlas
 """
 import numpy as np
 import scipy.special as sps
 import matplotlib.pyplot as plt
+
+####################
+# Sets up the imaging model
+#----------------------------------------------------
 
 # Calibration data for astigmatic imaging
 #----------------------------------------
@@ -139,7 +138,6 @@ def mujac_ts_XYZIBg(theta, numpixels, calib, kz, alpha):
     jac[4] = bg_per_angle
     return mu, jac
 
-
 ####################
 # Computes the CRLB
 #----------------------------------------------------
@@ -200,26 +198,44 @@ def crlb_study(zmax, numangles, minNA, maxNA, ncovglass, alpha):
         
     return(zrange, crlb_astig[:,2], crlb_ts[:,2], crlb_if[:,0])
      
-# Demo: 3 angles, NA = 1.33, 1.41, 1.49, alpha = 0.95
-#----------------------------------------------------
+########################################################################
+# Demo: 3 angles, NA = 1.33, 1.41, 1.49, alpha = 1, 0.95, 0.9, 0.85, 0.8
+#-----------------------------------------------------------------------
 if __name__ == "__main__":
     
-    x, a, b, c = crlb_study(0.3, 4, 1.3301, 2.5, 2.5, 1)
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13,7))
+    ax1.set_xlabel("z (nm)", fontsize=14)
+    ax1.set_ylabel("CRLB z (nm)", fontsize=14)
+    ax2.set_xlabel("z (nm)", fontsize=14)
+    ax2.set_ylabel("Improvement factor",fontsize=14)
+    ax1.set_xlim([0, 0.3])
+    ax1.set_ylim([0, 20])
+    ax1.tick_params(axis='both', labelsize=14)
+    ax2.set_xlim([0, 0.3])
+    ax2.set_ylim([1, 3])
+    ax2.tick_params(axis='both', labelsize=14)
+    ax1.grid()
+    ax2.grid()
     
-    plt.figure()
-    plt.title("NA=1.33,1.41,1.49; a=0.95")
-    plt.xlabel("z (nm)")
-    plt.ylabel("CRLB z (nm)")
-    plt.plot(x, a, label = "astigmatic only")
-    plt.plot(x, b, label = "TIRFscan")
-    plt.legend()
-    plt.grid()
-    plt.show()
+    # crlb_study(z range, number of angles, minimum NA,
+    #               maximum NA, n of cover slip, alpha factor)
+    # assumes n of sample is 1.33
     
-    plt.figure()
-    plt.title("NA=1.33,1.41,1.49; a=0.95")
-    plt.xlabel("z (nm)")
-    plt.ylabel("Improvement factor")
-    plt.plot(x, c)
-    plt.grid()
+    nang = 3 #to get figure 2c (i.e., 2 angles), change this to 2
+    
+    x, a, b, c = crlb_study(0.3, nang, 1.3301, 1.49, 1.51, 1)
+    ax1.plot(x, a, label = "astigmatic only", color='black')
+    
+    for i in [1, 0.95, 0.9, 0.85, 0.8]:
+        x, a, b, c = crlb_study(0.3, nang, 1.3301, 1.49, 1.51, i)
+        ax1.plot(x, b, label = f"alpha = {i}")
+        ax2.plot(x, c)
+    
+    fig.suptitle(f'TIRFscan with {nang} angles from NA = 1.33 to 1.49', 
+                 fontsize=16)
+    ax1.legend(fontsize=12)
     plt.show()
+
+
+    
+    
