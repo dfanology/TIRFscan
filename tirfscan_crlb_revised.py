@@ -299,14 +299,14 @@ def generate_fig2():
     fp = 0
     
     fig2 = plt.figure(figsize=(10,10))
+    
     gs2 = fig2.add_gridspec(3, 2, figure=fig2)
     ax2a = fig2.add_subplot(gs2[:,0])
     ax2b = fig2.add_subplot(gs2[0,1])
     ax2c = fig2.add_subplot(gs2[1,1])
     ax2d = fig2.add_subplot(gs2[2,1])
     fig2.subplots_adjust(wspace=0.25)
-
-    ax2a.set_xlabel("z (nm)", fontsize=14)
+    ax2a.set_xlabel(r"$\theta_\mathrm{z}$ (nm)", fontsize=14)
     ax2a.set_ylabel("CRLB z (nm)", fontsize=14)
     ax2a.set_xlim([0, zrange])
     ax2a.set_xticks(np.linspace(0,zrange,7))
@@ -317,7 +317,7 @@ def generate_fig2():
     ax2a.grid()
     ax2a.text(-0.06,20, "a)", fontsize=18)
 
-    ax2d.set_xlabel("z (nm)", fontsize=14)
+    ax2d.set_xlabel(r"$\theta_\mathrm{z}$ (nm)", fontsize=14)
     ax2b.set_ylabel("Improvement factor", fontsize=14)
     ax2c.set_ylabel("Improvement factor", fontsize=14)
     ax2d.set_ylabel("Improvement factor", fontsize=14)
@@ -391,7 +391,7 @@ def generate_fig2():
     ax2d.plot(x, c, label = "NA=1.332,1.69;\n\u03B1=0.95", color='#84d6ff', linestyle='dotted', linewidth=3)
     ax2d.legend(fontsize=9)
     
-    fig2.savefig('fig2.png', dpi=600, bbox_inches='tight')
+    fig2.savefig('Fig2.eps', bbox_inches='tight', format='eps')
     
 def generate_fig3():
     
@@ -405,7 +405,7 @@ def generate_fig3():
     ax3c = fig3.add_subplot(gs3[-1,1])
     fig3.subplots_adjust(wspace=0.25)
 
-    ax3a.set_xlabel("z (nm)", fontsize=14)
+    ax3a.set_xlabel(r"$\theta_\mathrm{z}$ (nm)", fontsize=14)
     ax3a.set_ylabel("CRLB z (nm)", fontsize=14)
     ax3a.set_xlim([0, zrange])
     ax3a.set_xticks(np.linspace(0,zrange,7))
@@ -416,7 +416,7 @@ def generate_fig3():
     ax3a.grid()
     ax3a.text(-0.06,19.8, "a)", fontsize=18)
     
-    ax3c.set_xlabel("z (nm)", fontsize=14)
+    ax3c.set_xlabel(r"$\theta_\mathrm{z}$ (nm)", fontsize=14)
     ax3b.set_ylabel("Improvement factor", fontsize=14)
     ax3c.set_ylabel("Improvement factor", fontsize=14)
     ax3b.set_xlim([0, zrange])
@@ -483,7 +483,7 @@ def generate_fig3():
     ax3b.legend(fontsize=9)
     ax3c.legend(fontsize=9)
     
-    fig3.savefig('fig3.png', dpi=600, bbox_inches='tight')
+    fig3.savefig('Fig3.eps', bbox_inches='tight', format='eps')
     
 def generate_fig4():
         
@@ -496,7 +496,7 @@ def generate_fig4():
     ax4c = fig4.add_subplot(gs4[1,1])
     fig4.subplots_adjust(hspace=0.25)
     
-    ax4a.set_xlabel("z (nm)", fontsize=14)
+    ax4a.set_xlabel(r"$\theta_\mathrm{z}$ (nm)", fontsize=14)
     ax4a.set_ylabel("CRLB z (nm)", fontsize=14)
     ax4a.set_xlim([0, zrange])
     ax4a.set_xticks(np.linspace(0,zrange,11))
@@ -527,7 +527,7 @@ def generate_fig4():
     
     zrange = 0.3
 
-    ax4b.set_xlabel("z (nm)", fontsize=14)
+    ax4b.set_xlabel(r"$\theta_\mathrm{z}$ (nm)", fontsize=14)
     ax4b.set_ylabel("CRLB z (nm)", fontsize=14)
     ax4b.set_xlim([0, zrange])
     ax4b.set_xticks(np.linspace(0,zrange,7))
@@ -574,4 +574,4 @@ def generate_fig4():
     
     ax4a.legend(fontsize=12, bbox_to_anchor=(0.5, -1.92), loc="lower center", title="NA = 1.33, 1.49; \u03B1 = 1.0", borderpad=1, ncol=2)
     
-    fig4.savefig('fig4.png', dpi=600, bbox_inches='tight')
+    fig4.savefig('Fig4.eps', bbox_inches='tight', format='eps')
