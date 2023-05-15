@@ -537,7 +537,7 @@ def generate_fig4():
     ax4b.tick_params(axis='both', labelsize=12)
     ax4b.grid()
     ax4b.text(-0.06,20, "b)", fontsize=18)
-    ax4c.set_xlabel("z (nm)", fontsize=14)
+    ax4c.set_xlabel(r"$\theta_\mathrm{z}$ (nm)", fontsize=14)
     ax4c.set_ylabel("Improvement factor",fontsize=14)    
     ax4c.set_xlim([0, zrange])
     ax4c.set_xticks(np.linspace(0,zrange,7))
